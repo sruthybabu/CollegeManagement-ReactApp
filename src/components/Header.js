@@ -28,6 +28,9 @@ const Header = () => {
         <li className="nav-item">
             <Link to="/view" className="nav-link">View Student</Link>
         </li>
+        <li className="nav-item">
+            <Link to="/viewfac" className="nav-link">View Faculty</Link>
+        </li>
         
       </ul>
     </div>
