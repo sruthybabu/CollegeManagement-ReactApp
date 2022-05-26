@@ -1,36 +1,18 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import Header from './Header'
 
 const ViewStudent = () => {
-    var viewstudent=[
-        {
-            "admno":1001,
-            "rollNo":1,
-            "name":"Adhi",
-            "class":"BSc cs",
-            "parentName":"lal",
-            "mobile":8976543210,
-            "address":"adhi villa"
-        },
-        {
-            "admno":1002,
-            "rollNo":2,
-            "name":"Anu",
-            "class":"BSc cs",
-            "parentName":"Raju",
-            "mobile":8945329012,
-            "address":"anu villa"
-        },
-        {
-            "admno":1003,
-            "rollNo":3,
-            "name":"Arun",
-            "class":"BSc cs",
-            "parentName":"lal",
-            "mobile":8976543210,
-            "address":"arun villa"
-        }
-    ]
+    var [viewstudent,setViewstudent]=useState([])
+    var [loadstatus,setLoadstatus]=useState(true)
+    axios.get("http://localhost:5006/api/studentview").then(
+      (response)=>{
+        console.log(response.data)
+        setViewstudent(response.data)
+        setLoadstatus(false)
+
+      }
+    )
   return (
     <div>
         <Header/>
@@ -39,8 +21,10 @@ const ViewStudent = () => {
                 <div className='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
                     <div className='row g-3'>
                         <div className='col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12'>
-                         <table class="table table-primary table-striped">
-  <thead>
+                         {loadstatus ? <div className="spinner-border" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div> : <table className="table table-primary table-striped">
+  <thead className='table-success'>
     <tr>
       <th scope="col">Admission No</th>
       <th scope="col">Roll No</th>
@@ -65,7 +49,7 @@ const ViewStudent = () => {
     </tr>
     })}   
   </tbody>
-</table>
+</table>}
 
                         </div>
 
