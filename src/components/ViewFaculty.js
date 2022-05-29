@@ -3,6 +3,24 @@ import React, { useState } from 'react'
 import Header from './Header'
 
 const ViewFaculty = () => {
+  const deleteData=(id)=>{
+    const data={"_id":id}
+    console.log(data)
+    axios.post("http://localhost:5006/api/facultydelete",data).then(
+        (response)=>{
+            if(response.data.status=="success")
+            {
+                alert("Successfully deleted")
+            }
+            else
+            {
+                alert("Failed to delete")
+
+            }
+        })
+}
+
+
     var [viewfaculty,setViewfaculty]=useState([])
     var [loadstatus,setLoadstatus]=useState(true)
     axios.get("http://localhost:5006/api/facultiesview").then(
@@ -32,6 +50,7 @@ const ViewFaculty = () => {
       <th scope="col">Address</th>
       <th scope="col">Pincode</th>
       <th scope="col">District</th>
+      <th scope="col">Action</th>
       
       
     </tr>
@@ -45,6 +64,7 @@ const ViewFaculty = () => {
       <td>{value.facultyaddress}</td>
       <td>{value.pinCode}</td>
       <td>{value.district}</td>
+      <td><button onClick={()=>{deleteData(value._id)}} className='btn btn-danger'>DELETE</button></td>
       
     </tr>
     })}   
