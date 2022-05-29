@@ -5,7 +5,7 @@ const SearchStudent = () => {
     const deleteData=(id)=>{
         const data={"_id":id}
         console.log(data)
-        axios.post("http://localhost:5006/api/studentsearch",data).then(
+        axios.post("http://localhost:5006/api/studentdelete",data).then(
             (response)=>{
                 if(response.data.status=="success")
                 {
